@@ -1,128 +1,120 @@
 (function () {
   'use strict';
+
   var doc = document.documentElement;
+  var headerHost = document.getElementById('site-header');
+  var footerHost = document.getElementById('site-footer');
+  var script = document.currentScript;
+  var assetBase = script ? new URL('.', script.src).href : document.baseURI;
 
-  /* ========== INJECT HEADER AND FOOTER ========== */
-  Promise.all([
-    fetch('header.html').then(function (r) { return r.text(); }),
-    fetch('footer.html').then(function (r) { return r.text(); })
-  ]).then(function (results) {
-    document.getElementById('site-header').innerHTML = results[0];
-    document.getElementById('site-footer').innerHTML = results[1];
-    init();
-  }).catch(function (err) {
-    console.error('Failed to load header/footer:', err);
-  });
-
-  /* ========== THEME ========== */
-  function setTheme(mode) {
-    doc.classList.toggle('is-dark', mode === 'dark');
-    localStorage.setItem('theme', mode);
+  function readStorage(key) {
+    try { return localStorage.getItem(key); } catch (error) { return null; }
   }
 
-  /* ========== LANGUAGE ========== */
+  function writeStorage(key, value) {
+    try { localStorage.setItem(key, value); } catch (error) { /* Storage is optional. */ }
+  }
+
+  function setTheme(mode) {
+    var theme = mode === 'dark' ? 'dark' : 'light';
+    doc.classList.toggle('is-dark', theme === 'dark');
+    writeStorage('theme', theme);
+  }
+
   var dict = {
     en: {
-      'nav.home':'Home','nav.nepali':'Nepali','nav.english':'English',
-      'nav.games':'Games','nav.about':'About','nav.contact':'Contact',
-      'hero.badge':'Nepal · Class 10 · SEE 2082/83',
-      'hero.title1':'Knowledge','hero.title2':'Confidence','hero.title3':'Results',
-      'hero.sub':"Class 10 study resources built for Nepal's SEE students.",
-      'card.available':'Available','card.soon':'Soon',
-      'card.nepali':'Nepali','card.nepali.desc':'Notes · Grammar · Solutions',
-      'card.english':'English','card.english.desc':'Notes · Grammar · Solutions',
-      'card.science':'Science','card.science.desc':'Notes · Solutions',
-      'card.math':'Mathematics','card.math.desc':'Step-by-step solutions',
-      'content.about.title':'About PragyaRoot',
-      'content.about.body':'PragyaRoot is a free study resource for Class 10 students preparing for the SEE examination in Nepal.',
-      'content.why.title':'Why it exists',
-      'content.why.body':'Most Class 10 material online is either too shallow to be useful or too dense to read on a phone.',
-      'content.what.title':"What you'll find",
-      'content.what.li1':'Chapter notes for every subject',
-      'content.what.li2':'Step-by-step exercise solutions',
-      'content.what.li3':'Nepali and English grammar guides',
-      'content.what.li4':'Interactive learning games',
-      'content.cta':'Learn more',
-      'footer.tagline':"Class 10 study resources for Nepal's SEE students.",
-      'footer.study':'Study','footer.site':'Site','footer.privacy':'Privacy',
-      'footer.copy':'© 2026 PragyaRoot. All rights reserved.',
-      'footer.made':'Made in Nepal'
+      'nav.home':'Home','nav.nepali':'Nepali','nav.english':'English','nav.games':'Games','nav.about':'About','nav.contact':'Contact',
+      'hero.badge':'Nepal · Class 10 · SEE 2082/83','hero.title1':'Knowledge','hero.title2':'Confidence','hero.title3':'Results',
+      'hero.sub':"Class 10 study resources built for Nepal's SEE students.",'card.available':'Available','card.soon':'Soon',
+      'card.nepali':'Nepali','card.nepali.desc':'Notes · Grammar · Solutions','card.english':'English','card.english.desc':'Notes · Grammar · Solutions',
+      'card.science':'Science','card.science.desc':'Notes · Solutions','card.math':'Mathematics','card.math.desc':'Step-by-step solutions',
+      'content.about.title':'About PragyaRoot','content.about.body':'PragyaRoot is a free study resource for Class 10 students preparing for the SEE examination in Nepal.',
+      'content.why.title':'Why it exists','content.why.body':'Most Class 10 material online is either too shallow to be useful or too dense to read on a phone.',
+      'content.what.title':"What you'll find",'content.what.li1':'Chapter notes for every subject','content.what.li2':'Step-by-step exercise solutions',
+      'content.what.li3':'Nepali and English grammar guides','content.what.li4':'Interactive learning games','content.cta':'Learn more',
+      'footer.tagline':"Class 10 study resources for Nepal's SEE students.",'footer.study':'Study','footer.site':'Site','footer.privacy':'Privacy',
+      'footer.copy':'© 2026 PragyaRoot. All rights reserved.','footer.made':'Made in Nepal'
     },
     ne: {
-      'nav.home':'गृहपृष्ठ','nav.nepali':'नेपाली','nav.english':'अङ्ग्रेजी',
-      'nav.games':'खेलहरू','nav.about':'हाम्रोबारे','nav.contact':'सम्पर्क',
-      'hero.badge':'नेपाल · कक्षा १० · SEE २०८२/८३',
-      'hero.title1':'ज्ञान','hero.title2':'आत्मविश्वास','hero.title3':'नतिजा',
-      'hero.sub':'नेपालका SEE विद्यार्थीहरूका लागि कक्षा १० अध्ययन सामग्री।',
-      'card.available':'उपलब्ध','card.soon':'चाँडै',
-      'card.nepali':'नेपाली','card.nepali.desc':'नोट्स · व्याकरण · समाधान',
-      'card.english':'अङ्ग्रेजी','card.english.desc':'नोट्स · व्याकरण · समाधान',
-      'card.science':'विज्ञान','card.science.desc':'नोट्स · समाधान',
-      'card.math':'गणित','card.math.desc':'चरणबद्ध समाधान',
-      'content.about.title':'प्रज्ञारूटको बारेमा',
-      'content.about.body':'प्रज्ञारूट नेपालमा SEE परीक्षाको तयारी गर्ने कक्षा १० का विद्यार्थीहरूका लागि निःशुल्क अध्ययन स्रोत हो।',
-      'content.why.title':'किन यो अवस्थित छ',
-      'content.why.body':'अनलाइनमा पाइने धेरै कक्षा १० सामग्री या त उपयोगी हुन धेरै कम छन् या फोनमा पढ्न धेरै गहन।',
-      'content.what.title':'तपाईंले के पाउनुहुनेछ',
-      'content.what.li1':'प्रत्येक विषयका अध्याय नोट्स',
-      'content.what.li2':'चरणबद्ध अभ्यास समाधान',
-      'content.what.li3':'नेपाली र अङ्ग्रेजी व्याकरण मार्गदर्शन',
-      'content.what.li4':'अन्तरक्रियात्मक सिकाइ खेलहरू',
-      'content.cta':'अझ जान्नुहोस्',
-      'footer.tagline':'नेपालका SEE विद्यार्थीहरूका लागि कक्षा १० अध्ययन स्रोत।',
-      'footer.study':'अध्ययन','footer.site':'साइट','footer.privacy':'गोपनीयता',
-      'footer.copy':'© २०२६ प्रज्ञारूट। सर्वाधिकार सुरक्षित।',
-      'footer.made':'नेपालमा निर्मित'
+      'nav.home':'गृहपृष्ठ','nav.nepali':'नेपाली','nav.english':'अङ्ग्रेजी','nav.games':'खेलहरू','nav.about':'हाम्रोबारे','nav.contact':'सम्पर्क',
+      'hero.badge':'नेपाल · कक्षा १० · SEE २०८२/८३','hero.title1':'ज्ञान','hero.title2':'आत्मविश्वास','hero.title3':'नतिजा',
+      'hero.sub':'नेपालका SEE विद्यार्थीहरूका लागि कक्षा १० अध्ययन सामग्री।','card.available':'उपलब्ध','card.soon':'चाँडै',
+      'card.nepali':'नेपाली','card.nepali.desc':'नोट्स · व्याकरण · समाधान','card.english':'अङ्ग्रेजी','card.english.desc':'नोट्स · व्याकरण · समाधान',
+      'card.science':'विज्ञान','card.science.desc':'नोट्स · समाधान','card.math':'गणित','card.math.desc':'चरणबद्ध समाधान',
+      'content.about.title':'प्रज्ञारूटको बारेमा','content.about.body':'प्रज्ञारूट नेपालमा SEE परीक्षाको तयारी गर्ने कक्षा १० का विद्यार्थीहरूका लागि निःशुल्क अध्ययन स्रोत हो।',
+      'content.why.title':'यो किन छ','content.why.body':'अनलाइनमा पाइने धेरै कक्षा १० सामग्री या त उपयोगी हुन धेरै सरल छन् वा फोनमा पढ्न धेरै गाह्रा छन्।',
+      'content.what.title':'तपाईंले के पाउनुहुनेछ','content.what.li1':'प्रत्येक विषयका अध्याय नोट्स','content.what.li2':'चरणबद्ध अभ्यास समाधान',
+      'content.what.li3':'नेपाली र अङ्ग्रेजी व्याकरण मार्गदर्शन','content.what.li4':'अन्तरक्रियात्मक सिकाइ खेलहरू','content.cta':'अझ जान्नुहोस्',
+      'footer.tagline':'नेपालका SEE विद्यार्थीहरूका लागि कक्षा १० अध्ययन स्रोत।','footer.study':'अध्ययन','footer.site':'साइट','footer.privacy':'गोपनीयता',
+      'footer.copy':'© २०२६ प्रज्ञारूट। सर्वाधिकार सुरक्षित।','footer.made':'नेपालमा निर्मित'
     }
   };
 
-  function applyLanguage(lang) {
-    var pack = dict[lang] || dict.en;
-    document.querySelectorAll('[data-i18n]').forEach(function (el) {
-      var key = el.getAttribute('data-i18n');
-      if (pack[key] != null) el.textContent = pack[key];
+  function applyLanguage(language) {
+    var lang = dict[language] ? language : 'en';
+    var pack = dict[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function (element) {
+      var key = element.getAttribute('data-i18n');
+      if (pack[key] != null) element.textContent = pack[key];
     });
-    doc.setAttribute('lang', lang === 'ne' ? 'ne' : 'en');
-    document.querySelectorAll('.lang-btn').forEach(function (b) {
-      b.classList.toggle('active', b.dataset.lang === lang);
+    doc.lang = lang === 'ne' ? 'ne' : 'en';
+    document.querySelectorAll('.lang-btn').forEach(function (button) {
+      var active = button.dataset.lang === lang;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
     });
-    localStorage.setItem('lang', lang);
+    writeStorage('lang', lang);
   }
 
-  /* ========== INIT (runs after header/footer loaded) ========== */
   function init() {
-
-    /* THEME TOGGLES */
-    document.querySelectorAll('#theme-toggle, #theme-toggle-mobile').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        setTheme(doc.classList.contains('is-dark') ? 'light' : 'dark');
-      });
+    setTheme(readStorage('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+    document.querySelectorAll('#theme-toggle, #theme-toggle-mobile').forEach(function (button) {
+      button.addEventListener('click', function () { setTheme(doc.classList.contains('is-dark') ? 'light' : 'dark'); });
     });
-
-    /* LANGUAGE */
-    document.querySelectorAll('.lang-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () { applyLanguage(btn.dataset.lang); });
+    document.querySelectorAll('.lang-btn').forEach(function (button) {
+      button.addEventListener('click', function () { applyLanguage(button.dataset.lang); });
     });
-    applyLanguage(localStorage.getItem('lang') || 'en');
+    applyLanguage(readStorage('lang') || 'en');
 
-    /* MOBILE MENU */
+    var closeMenu = function () { document.body.classList.remove('menu-open'); };
     var hamburger = document.getElementById('hamburger');
-    var closeBtn = document.getElementById('sidebar-close');
+    var closeButton = document.getElementById('sidebar-close');
     var overlay = document.getElementById('overlay');
     if (hamburger) hamburger.addEventListener('click', function () { document.body.classList.add('menu-open'); });
-    if (closeBtn) closeBtn.addEventListener('click', function () { document.body.classList.remove('menu-open'); });
-    if (overlay) overlay.addEventListener('click', function () { document.body.classList.remove('menu-open'); });
+    if (closeButton) closeButton.addEventListener('click', closeMenu);
+    if (overlay) overlay.addEventListener('click', closeMenu);
 
-    /* BACK TO TOP */
     var backTop = document.getElementById('back-top');
     if (backTop) {
-      window.addEventListener('scroll', function () {
-        backTop.classList.toggle('show', window.scrollY > 400);
-      }, { passive: true });
-      backTop.addEventListener('click', function () {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
+      window.addEventListener('scroll', function () { backTop.classList.toggle('show', window.scrollY > 400); }, { passive: true });
+      backTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
     }
   }
 
+  function loadPartial(host, file) {
+    return fetch(new URL(file, assetBase), { cache: 'no-cache' }).then(function (response) {
+      if (!response.ok) throw new Error(file + ' returned ' + response.status);
+      return response.text();
+    }).then(function (html) {
+      host.innerHTML = html;
+    });
+  }
+
+  if (!headerHost || !footerHost) {
+    console.error('Header/footer containers are missing.');
+    return;
+  }
+
+  Promise.all([loadPartial(headerHost, 'header.html'), loadPartial(footerHost, 'footer.html')])
+    .then(function () {
+      init();
+      headerHost.classList.add('is-loaded');
+      footerHost.classList.add('is-loaded');
+    })
+    .catch(function (error) {
+      console.error('Failed to load header/footer:', error);
+      headerHost.classList.add('load-failed');
+      footerHost.classList.add('load-failed');
+      init();
+    });
 })();
