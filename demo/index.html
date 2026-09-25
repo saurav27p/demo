@@ -1,168 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>PragyaRoot — Demo</title>
-<meta name="description" content="Class 10 notes, exercise solutions, grammar and learning games for SEE Nepal.">
-<link rel="preconnect" href="https://blogger.googleusercontent.com">
-<link rel="stylesheet" href="style.css">
-<script>
-(function(){
-  var t = localStorage.getItem('theme');
-  if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  if (t === 'dark') document.documentElement.classList.add('is-dark');
-  document.documentElement.setAttribute('data-theme-ready','1');
-})();
-</script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="PragyaRoot demo for Class 10 SEE students in Nepal." />
+    <meta name="theme-color" content="#ffffff" />
+    <title>PragyaRoot — Demo</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script>
+      (function () {
+        try {
+          var savedTheme = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = savedTheme || (prefersDark ? 'dark' : 'light');
+          if (theme === 'dark') {
+            document.documentElement.classList.add('is-dark');
+          }
+        } catch (error) {
+          // Ignore storage failures.
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="overlay" id="overlay" aria-hidden="true"></div>
 
-<div class="overlay" id="overlay"></div>
-
-<!-- ============ SIDEBAR ============ -->
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-inner">
-
-    <div class="sidebar-head">
-      <a href="/" class="logo" aria-label="PragyaRoot">
-        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgVIBpNidrRIBvOIG6xuJvOsLRUB6DbUF7P0I4kipF1yLD9WPpUj-c5BwtlTBB-drIGQJi58ZF1-kqKeAAL0BlgyaKtOTgldphCdP2-H_C6EnC1gEs4soKlfO50jMuz3TCyHXKh5hwFmqNb6DVxZ2rrLjLOJjI0yhgKnRFMC6RMNTCmseU7L839vJoKMkIz=s400" alt="PragyaRoot">
-      </a>
-      <button type="button" class="sidebar-close" id="sidebar-close" aria-label="Close">×</button>
-    </div>
-
-    <nav class="sidebar-nav">
-      <a href="/" class="nav-link" data-i18n="nav.home">Home</a>
-      <a href="/p/class-10-nepali.html" class="nav-link" data-i18n="nav.nepali">Nepali</a>
-      <a href="/p/class-10-english.html" class="nav-link" data-i18n="nav.english">English</a>
-      <a href="/p/pragyaroot-games.html" class="nav-link" data-i18n="nav.games">Games</a>
-      <a href="/p/about-us.html" class="nav-link" data-i18n="nav.about">About</a>
-      <a href="/p/contact-us.html" class="nav-link" data-i18n="nav.contact">Contact</a>
-    </nav>
-
-    <div class="sidebar-foot">
-      <div class="controls">
-        <div class="lang-switch" role="group" aria-label="Language">
-          <button type="button" class="lang-btn" data-lang="en">EN</button>
-          <button type="button" class="lang-btn" data-lang="ne">NE</button>
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar menu">
+      <div class="sidebar-inner">
+        <div class="sidebar-head">
+          <a href="./" class="logo" aria-label="PragyaRoot home">PragyaRoot</a>
+          <button type="button" class="sidebar-close" id="sidebar-close" aria-label="Close menu">×</button>
         </div>
-        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
-          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <a href="./" class="nav-link is-active">Home</a>
+          <a href="./p/class-10-nepali.html" class="nav-link">Nepali</a>
+          <a href="./p/class-10-english.html" class="nav-link">English</a>
+          <a href="./p/pragyaroot-games.html" class="nav-link">Games</a>
+          <a href="./p/about-us.html" class="nav-link">About</a>
+          <a href="./p/contact-us.html" class="nav-link">Contact</a>
+        </nav>
+
+        <div class="sidebar-foot">
+          <div class="controls">
+            <div class="lang-switch" role="group" aria-label="Language switcher">
+              <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+              <button type="button" class="lang-btn" data-lang="ne" aria-pressed="false">NE</button>
+            </div>
+
+            <button type="button" class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
+              <span class="icon-sun">☀</span>
+              <span class="icon-moon">☾</span>
+            </button>
+          </div>
+          <p class="sidebar-copy">© 2026 PragyaRoot</p>
+        </div>
+      </div>
+    </aside>
+
+    <header class="topbar" id="topbar">
+      <button type="button" class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <a href="./" class="topbar-logo">PragyaRoot</a>
+
+      <div class="topbar-actions">
+        <button type="button" class="icon-btn topbar-theme" id="theme-toggle-mobile" aria-label="Toggle theme">
+          <span class="icon-sun">☀</span>
+          <span class="icon-moon">☾</span>
         </button>
       </div>
-      <p class="sidebar-copy">© 2026 PragyaRoot</p>
-    </div>
+    </header>
 
-  </div>
-</aside>
+    <main class="page">
+      <section class="hero">
+        <p class="hero-eyebrow">
+          <span class="dot"></span>
+          <span data-i18n="hero.badge">Nepal · Class 10 · SEE 2082/83</span>
+        </p>
 
-<!-- ============ TOPBAR (mobile) ============ -->
-<header class="topbar" id="topbar">
-  <button type="button" class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-  <a href="/" class="topbar-logo" aria-label="PragyaRoot">
-    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgVIBpNidrRIBvOIG6xuJvOsLRUB6DbUF7P0I4kipF1yLD9WPpUj-c5BwtlTBB-drIGQJi58ZF1-kqKeAAL0BlgyaKtOTgldphCdP2-H_C6EnC1gEs4soKlfO50jMuz3TCyHXKh5hwFmqNb6DVxZ2rrLjLOJjI0yhgKnRFMC6RMNTCmseU7L839vJoKMkIz=s320" alt="PragyaRoot">
-  </a>
-  <div class="topbar-actions">
-    <button type="button" class="icon-btn" id="theme-toggle-mobile" aria-label="Toggle theme">
-      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <h1 class="hero-title">
+          <span data-i18n="hero.title1">Knowledge</span>
+          <span class="sep">·</span>
+          <span data-i18n="hero.title2">Confidence</span>
+          <span class="sep">·</span>
+          <span data-i18n="hero.title3">Results</span>
+        </h1>
+
+        <p class="hero-sub" data-i18n="hero.sub">Class 10 study resources built for Nepal's SEE students.</p>
+      </section>
+
+      <section class="cards" aria-label="Study resources">
+        <a href="./p/class-10-nepali.html" class="card">
+          <span class="card-tag" data-i18n="card.available">Available</span>
+          <h2 class="card-title" data-i18n="card.nepali">Nepali</h2>
+          <p class="card-desc" data-i18n="card.nepali.desc">Notes · Grammar · Solutions</p>
+        </a>
+
+        <a href="./p/class-10-english.html" class="card">
+          <span class="card-tag" data-i18n="card.available">Available</span>
+          <h2 class="card-title" data-i18n="card.english">English</h2>
+          <p class="card-desc" data-i18n="card.english.desc">Notes · Grammar · Solutions</p>
+        </a>
+
+        <div class="card is-soon" aria-disabled="true">
+          <span class="card-tag soon" data-i18n="card.soon">Soon</span>
+          <h2 class="card-title" data-i18n="card.science">Science</h2>
+          <p class="card-desc" data-i18n="card.science.desc">Notes · Solutions</p>
+        </div>
+
+        <div class="card is-soon" aria-disabled="true">
+          <span class="card-tag soon" data-i18n="card.soon">Soon</span>
+          <h2 class="card-title" data-i18n="card.math">Mathematics</h2>
+          <p class="card-desc" data-i18n="card.math.desc">Step-by-step solutions</p>
+        </div>
+      </section>
+
+      <section class="content">
+        <h2 data-i18n="content.about.title">About PragyaRoot</h2>
+        <p data-i18n="content.about.body">PragyaRoot is a free study resource for Class 10 students preparing for the SEE examination in Nepal.</p>
+
+        <h2 data-i18n="content.why.title">Why it exists</h2>
+        <p data-i18n="content.why.body">Most Class 10 material online is either too shallow to be useful or too dense to read on a phone.</p>
+
+        <h2 data-i18n="content.what.title">What you'll find</h2>
+        <ul>
+          <li data-i18n="content.what.li1">Chapter notes for every subject</li>
+          <li data-i18n="content.what.li2">Step-by-step exercise solutions</li>
+          <li data-i18n="content.what.li3">Nepali and English grammar guides</li>
+          <li data-i18n="content.what.li4">Interactive learning games</li>
+        </ul>
+
+        <p class="content-cta">
+          <a href="./p/about-us.html" class="btn" data-i18n="content.cta">Learn more</a>
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="footer-logo">PragyaRoot</span>
+          <p data-i18n="footer.tagline">Class 10 study resources for Nepal's SEE students.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer.study">Study</h4>
+          <a href="./p/class-10-nepali.html" data-i18n="nav.nepali">Nepali</a>
+          <a href="./p/class-10-english.html" data-i18n="nav.english">English</a>
+          <a href="./p/pragyaroot-games.html" data-i18n="nav.games">Games</a>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer.site">Site</h4>
+          <a href="./p/about-us.html" data-i18n="nav.about">About</a>
+          <a href="./p/contact-us.html" data-i18n="nav.contact">Contact</a>
+          <a href="./p/privacy-policy.html" data-i18n="footer.privacy">Privacy</a>
+        </div>
+      </div>
+
+      <div class="footer-bar">
+        <span data-i18n="footer.copy">© 2026 PragyaRoot. All rights reserved.</span>
+        <span class="footer-made" data-i18n="footer.made">Made in Nepal</span>
+      </div>
+    </footer>
+
+    <button type="button" class="back-top" id="back-top" aria-label="Back to top">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
     </button>
-  </div>
-</header>
 
-<!-- ============ PAGE ============ -->
-<main class="page">
-
-  <section class="hero">
-    <p class="hero-eyebrow">
-      <span class="dot"></span>
-      <span data-i18n="hero.badge">Nepal · Class 10 · SEE 2082/83</span>
-    </p>
-    <h1 class="hero-title">
-      <span data-i18n="hero.title1">Knowledge</span><span class="sep">·</span><span data-i18n="hero.title2">Confidence</span><span class="sep">·</span><span data-i18n="hero.title3">Results</span>
-    </h1>
-    <p class="hero-sub" data-i18n="hero.sub">Class 10 study resources built for Nepal's SEE students.</p>
-  </section>
-
-  <section class="cards">
-    <a href="/p/class-10-nepali.html" class="card">
-      <span class="card-tag" data-i18n="card.available">Available</span>
-      <h3 class="card-title" data-i18n="card.nepali">Nepali</h3>
-      <p class="card-desc" data-i18n="card.nepali.desc">Notes · Grammar · Solutions</p>
-    </a>
-    <a href="/p/class-10-english.html" class="card">
-      <span class="card-tag" data-i18n="card.available">Available</span>
-      <h3 class="card-title" data-i18n="card.english">English</h3>
-      <p class="card-desc" data-i18n="card.english.desc">Notes · Grammar · Solutions</p>
-    </a>
-    <div class="card is-soon">
-      <span class="card-tag soon" data-i18n="card.soon">Soon</span>
-      <h3 class="card-title" data-i18n="card.science">Science</h3>
-      <p class="card-desc" data-i18n="card.science.desc">Notes · Solutions</p>
-    </div>
-    <div class="card is-soon">
-      <span class="card-tag soon" data-i18n="card.soon">Soon</span>
-      <h3 class="card-title" data-i18n="card.math">Mathematics</h3>
-      <p class="card-desc" data-i18n="card.math.desc">Step-by-step solutions</p>
-    </div>
-  </section>
-
-  <section class="content">
-    <h2 data-i18n="content.about.title">About PragyaRoot</h2>
-    <p data-i18n="content.about.body">PragyaRoot is a free study resource for Class 10 students preparing for the SEE examination in Nepal.</p>
-
-    <h2 data-i18n="content.why.title">Why it exists</h2>
-    <p data-i18n="content.why.body">Most Class 10 material online is either too shallow to be useful or too dense to read on a phone.</p>
-
-    <h2 data-i18n="content.what.title">What you'll find</h2>
-    <ul>
-      <li data-i18n="content.what.li1">Chapter notes for every subject</li>
-      <li data-i18n="content.what.li2">Step-by-step exercise solutions</li>
-      <li data-i18n="content.what.li3">Nepali and English grammar guides</li>
-      <li data-i18n="content.what.li4">Interactive learning games</li>
-    </ul>
-
-    <p class="content-cta">
-      <a href="/p/about-us.html" class="btn" data-i18n="content.cta">Learn more</a>
-    </p>
-  </section>
-
-</main>
-
-<!-- ============ FOOTER ============ -->
-<footer class="footer">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgVIBpNidrRIBvOIG6xuJvOsLRUB6DbUF7P0I4kipF1yLD9WPpUj-c5BwtlTBB-drIGQJi58ZF1-kqKeAAL0BlgyaKtOTgldphCdP2-H_C6EnC1gEs4soKlfO50jMuz3TCyHXKh5hwFmqNb6DVxZ2rrLjLOJjI0yhgKnRFMC6RMNTCmseU7L839vJoKMkIz=s320" alt="PragyaRoot" class="footer-logo-img">
-      <p data-i18n="footer.tagline">Class 10 study resources for Nepal's SEE students.</p>
-    </div>
-    <div class="footer-col">
-      <h4 data-i18n="footer.study">Study</h4>
-      <a href="/p/class-10-nepali.html" data-i18n="nav.nepali">Nepali</a>
-      <a href="/p/class-10-english.html" data-i18n="nav.english">English</a>
-      <a href="/p/pragyaroot-games.html" data-i18n="nav.games">Games</a>
-    </div>
-    <div class="footer-col">
-      <h4 data-i18n="footer.site">Site</h4>
-      <a href="/p/about-us.html" data-i18n="nav.about">About</a>
-      <a href="/p/contact-us.html" data-i18n="nav.contact">Contact</a>
-      <a href="/p/privacy-policy.html" data-i18n="footer.privacy">Privacy</a>
-    </div>
-  </div>
-  <div class="footer-bar">
-    <span data-i18n="footer.copy">© 2026 PragyaRoot. All rights reserved.</span>
-    <span class="footer-made" data-i18n="footer.made">Made in Nepal</span>
-  </div>
-</footer>
-
-<button type="button" class="back-top" id="back-top" aria-label="Back to top">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-</button>
-
-<script src="script.js"></script>
-
-</body>
+    <script defer src="./script.js"></script>
+  </body>
 </html>

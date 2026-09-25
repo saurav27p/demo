@@ -1,11 +1,9 @@
 (function () {
   'use strict';
 
-  // Load the stylesheet from the same directory as this script. Using a URL
-  // based on the script location keeps this working on GitHub Pages and when
-  // the site is opened from a nested route.
-  var script = document.currentScript;
-  var stylesheetUrl = new URL('style.css', script ? script.src : window.location.href).href;
+  var currentScript = document.currentScript;
+  var baseUrl = currentScript && currentScript.src ? currentScript.src : window.location.href;
+  var stylesheetUrl = new URL('./style.css', baseUrl).href;
   var existing = document.querySelector('link[data-pragyaroot-stylesheet]');
 
   if (existing) {
