@@ -3,156 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demo — PragyaRoot</title>
+<title>PragyaRoot — Demo</title>
 <meta name="description" content="Demo page for PragyaRoot.">
-<link rel="stylesheet" href="/demo/style.css">
+<link rel="stylesheet" href="style.css">
 <script>
-(function(){var t=localStorage.getItem('theme')||'light';if(t==='dark')document.documentElement.classList.add('is-dark');})();
+(function(){
+  var t = localStorage.getItem('theme');
+  if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  if (t === 'dark') document.documentElement.classList.add('is-dark');
+})();
 </script>
 </head>
 <body>
 
-<header class="site-header" id="site-header">
-  <div class="header-inner">
-    <a href="javascript:;" class="mobile-toggle" id="mobile-toggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </a>
-    <a href="/" class="logo">
-      <img src="/images/logo.png" alt="PragyaRoot" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
-      <span class="logo-text" style="display:none">PragyaRoot</span>
-    </a>
-    <nav class="main-nav" id="main-nav">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/demo/">Demo</a></li>
-        <li><a href="/p/about-us.html">About</a></li>
-      </ul>
-    </nav>
-    <div class="header-actions">
-      <div class="lang-switch" id="lang-switch">
-        <button type="button" data-lang="en" class="lang-btn active">EN</button>
-        <button type="button" data-lang="ne" class="lang-btn">NE</button>
-      </div>
-      <button type="button" class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
-        <span class="icon-sun">☀</span>
-        <span class="icon-moon">☾</span>
-      </button>
+<div class="overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-inner">
+    <div class="sidebar-head">
+      <a href="/" class="logo">PragyaRoot</a>
+      <button type="button" class="sidebar-close" id="sidebar-close" aria-label="Close">×</button>
     </div>
+    <nav class="sidebar-nav">
+      <a href="/" class="nav-link" data-i18n="nav.home">Home</a>
+      <a href="/p/class-10-nepali.html" class="nav-link" data-i18n="nav.nepali">Nepali</a>
+      <a href="/p/class-10-english.html" class="nav-link" data-i18n="nav.english">English</a>
+      <a href="/p/pragyaroot-games.html" class="nav-link" data-i18n="nav.games">Games</a>
+      <a href="/p/about-us.html" class="nav-link" data-i18n="nav.about">About</a>
+      <a href="/p/contact-us.html" class="nav-link" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="controls">
+        <div class="lang-switch">
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="ne">NE</button>
+        </div>
+        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
+          <span class="icon-sun">☀</span>
+          <span class="icon-moon">☾</span>
+        </button>
+      </div>
+      <p class="sidebar-copy">© 2026 PragyaRoot</p>
+    </div>
+  </div>
+</aside>
+
+<header class="topbar" id="topbar">
+  <button type="button" class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="/" class="topbar-logo">PragyaRoot</a>
+  <div class="topbar-actions">
+    <button type="button" class="icon-btn topbar-theme" id="theme-toggle-mobile" aria-label="Toggle theme">
+      <span class="icon-sun">☀</span>
+      <span class="icon-moon">☾</span>
+    </button>
   </div>
 </header>
 
-<div class="overlay" id="overlay"></div>
-<aside class="slide-menu" id="slide-menu">
-  <div class="slide-menu-head">
-    <span class="slide-menu-title">Menu</span>
-    <button type="button" class="slide-menu-close" id="slide-menu-close" aria-label="Close">×</button>
-  </div>
-  <nav class="slide-menu-nav">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/demo/">Demo</a></li>
-      <li><a href="/p/about-us.html">About</a></li>
-    </ul>
-  </nav>
-</aside>
+<main class="page">
 
-<main class="site-main">
   <section class="hero">
-    <h1>Demo page</h1>
-    <p>This file lives at <code>/demo/index.html</code> and is served at <code>/demo/</code>.</p>
+    <p class="hero-eyebrow">
+      <span class="dot"></span>
+      <span data-i18n="hero.badge">Nepal · Class 10 · SEE 2082/83</span>
+    </p>
+    <h1 class="hero-title">
+      <span data-i18n="hero.title1">Knowledge</span>
+      <span class="sep">·</span>
+      <span data-i18n="hero.title2">Confidence</span>
+      <span class="sep">·</span>
+      <span data-i18n="hero.title3">Results</span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero.sub">Class 10 study resources built for Nepal's SEE students.</p>
   </section>
 
-  <article class="content">
-    <h2>How it works</h2>
-    <p>Folder path in GitHub = URL on the site. This file is inside <code>demo/</code>, so it renders at <code>pragyaroot.com/demo/</code>.</p>
+  <section class="cards">
+    <a href="/p/class-10-nepali.html" class="card">
+      <span class="card-tag" data-i18n="card.available">Available</span>
+      <h3 class="card-title" data-i18n="card.nepali">Nepali</h3>
+      <p class="card-desc" data-i18n="card.nepali.desc">Notes · Grammar · Solutions</p>
+    </a>
+    <a href="/p/class-10-english.html" class="card">
+      <span class="card-tag" data-i18n="card.available">Available</span>
+      <h3 class="card-title" data-i18n="card.english">English</h3>
+      <p class="card-desc" data-i18n="card.english.desc">Notes · Grammar · Solutions</p>
+    </a>
+    <div class="card is-soon">
+      <span class="card-tag soon" data-i18n="card.soon">Soon</span>
+      <h3 class="card-title" data-i18n="card.science">Science</h3>
+      <p class="card-desc" data-i18n="card.science.desc">Notes · Solutions</p>
+    </div>
+    <div class="card is-soon">
+      <span class="card-tag soon" data-i18n="card.soon">Soon</span>
+      <h3 class="card-title" data-i18n="card.math">Mathematics</h3>
+      <p class="card-desc" data-i18n="card.math.desc">Step-by-step solutions</p>
+    </div>
+  </section>
 
-    <h3>Try these</h3>
+  <section class="content">
+    <h2 data-i18n="content.about.title">About PragyaRoot</h2>
+    <p data-i18n="content.about.body">PragyaRoot is a free study resource for Class 10 students preparing for the SEE examination in Nepal.</p>
+
+    <h2 data-i18n="content.why.title">Why it exists</h2>
+    <p data-i18n="content.why.body">Most Class 10 material online is either too shallow to be useful or too dense to read on a phone.</p>
+
+    <h2 data-i18n="content.what.title">What you'll find</h2>
     <ul>
-      <li>Tap the moon icon — theme switches to dark</li>
-      <li>Tap <strong>EN</strong> or <strong>NE</strong> — button toggles</li>
-      <li>Resize browser to mobile — hamburger appears</li>
-      <li>Scroll down — back-to-top appears bottom-right</li>
+      <li data-i18n="content.what.li1">Chapter notes for every subject</li>
+      <li data-i18n="content.what.li2">Step-by-step exercise solutions</li>
+      <li data-i18n="content.what.li3">Nepali and English grammar guides</li>
+      <li data-i18n="content.what.li4">Interactive learning games</li>
     </ul>
 
-    <h3>Demo text block 1</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p class="content-cta">
+      <a href="/p/about-us.html" class="btn" data-i18n="content.cta">Learn more</a>
+    </p>
+  </section>
 
-    <h3>Demo text block 2</h3>
-    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-    <h3>Demo text block 3</h3>
-    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-
-    <blockquote>This blockquote tests styling. Scroll further to reveal back-to-top.</blockquote>
-
-    <h3>Demo text block 4</h3>
-    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-
-    <h3>Demo text block 5</h3>
-    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
-
-    <p>End of demo content.</p>
-  </article>
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner">
+<footer class="footer">
+  <div class="footer-grid">
     <div class="footer-brand">
-      <strong>PragyaRoot</strong>
-      <p>Class 10 study resources for Nepal's SEE students.</p>
+      <span class="footer-logo">PragyaRoot</span>
+      <p data-i18n="footer.tagline">Class 10 study resources for Nepal's SEE students.</p>
     </div>
-    <nav class="footer-nav">
-      <a href="/p/about-us.html">About</a>
-      <a href="/p/contact-us.html">Contact</a>
-      <a href="/p/privacy-policy.html">Privacy Policy</a>
-    </nav>
-    <div class="footer-copy">© 2026 PragyaRoot.</div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.study">Study</h4>
+      <a href="/p/class-10-nepali.html" data-i18n="nav.nepali">Nepali</a>
+      <a href="/p/class-10-english.html" data-i18n="nav.english">English</a>
+      <a href="/p/pragyaroot-games.html" data-i18n="nav.games">Games</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.site">Site</h4>
+      <a href="/p/about-us.html" data-i18n="nav.about">About</a>
+      <a href="/p/contact-us.html" data-i18n="nav.contact">Contact</a>
+      <a href="/p/privacy-policy.html" data-i18n="footer.privacy">Privacy</a>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span data-i18n="footer.copy">© 2026 PragyaRoot. All rights reserved.</span>
+    <span class="footer-made" data-i18n="footer.made">Made in Nepal</span>
   </div>
 </footer>
 
-<button type="button" class="back-top" id="back-top" aria-label="Back to top">↑</button>
+<button type="button" class="back-top" id="back-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
 
-<script>
-(function () {
-  var doc = document.documentElement;
-  var themeToggle = document.getElementById('theme-toggle');
-  if (themeToggle) {
-    themeToggle.addEventListener('click', function () {
-      doc.classList.toggle('is-dark');
-      localStorage.setItem('theme', doc.classList.contains('is-dark') ? 'dark' : 'light');
-    });
-  }
-  var langBtns = document.querySelectorAll('.lang-btn');
-  var savedLang = localStorage.getItem('lang') || 'en';
-  langBtns.forEach(function (btn) {
-    if (btn.dataset.lang === savedLang) btn.classList.add('active');
-    else btn.classList.remove('active');
-    btn.addEventListener('click', function () {
-      langBtns.forEach(function (b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      localStorage.setItem('lang', btn.dataset.lang);
-    });
-  });
-  var toggle = document.getElementById('mobile-toggle');
-  var overlay = document.getElementById('overlay');
-  var closeBtn = document.getElementById('slide-menu-close');
-  function openMenu(){ document.body.classList.add('menu-open'); }
-  function closeMenu(){ document.body.classList.remove('menu-open'); }
-  if (toggle) toggle.addEventListener('click', openMenu);
-  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-  if (overlay) overlay.addEventListener('click', closeMenu);
-  var backTop = document.getElementById('back-top');
-  if (backTop) {
-    window.addEventListener('scroll', function () {
-      if (window.scrollY > 400) backTop.classList.add('show');
-      else backTop.classList.remove('show');
-    });
-    backTop.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-})();
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
