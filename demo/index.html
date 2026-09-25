@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo — PragyaRoot</title>
+<meta name="description" content="Demo page for PragyaRoot.">
+<link rel="stylesheet" href="/style.css">
+<script>
+(function(){var t=localStorage.getItem('theme')||'light';if(t==='dark')document.documentElement.classList.add('is-dark');})();
+</script>
+</head>
+<body>
+
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <a href="javascript:;" class="mobile-toggle" id="mobile-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </a>
+    <a href="/" class="logo">
+      <img src="/images/logo.png" alt="PragyaRoot" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+      <span class="logo-text" style="display:none">PragyaRoot</span>
+    </a>
+    <nav class="main-nav" id="main-nav">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/demo/">Demo</a></li>
+        <li><a href="/p/about-us.html">About</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switch" id="lang-switch">
+        <button type="button" data-lang="en" class="lang-btn active">EN</button>
+        <button type="button" data-lang="ne" class="lang-btn">NE</button>
+      </div>
+      <button type="button" class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
+        <span class="icon-sun">☀</span>
+        <span class="icon-moon">☾</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="overlay" id="overlay"></div>
+<aside class="slide-menu" id="slide-menu">
+  <div class="slide-menu-head">
+    <span class="slide-menu-title">Menu</span>
+    <button type="button" class="slide-menu-close" id="slide-menu-close" aria-label="Close">×</button>
+  </div>
+  <nav class="slide-menu-nav">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/demo/">Demo</a></li>
+      <li><a href="/p/about-us.html">About</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<main class="site-main">
+  <section class="hero">
+    <h1>Demo page</h1>
+    <p>This file lives at <code>/demo/index.html</code> and is served at <code>/demo/</code>.</p>
+  </section>
+
+  <article class="content">
+    <h2>How it works</h2>
+    <p>Folder path in GitHub = URL on the site. This file is inside <code>demo/</code>, so it renders at <code>pragyaroot.com/demo/</code>.</p>
+
+    <h3>Try these</h3>
+    <ul>
+      <li>Tap the moon icon — theme switches to dark</li>
+      <li>Tap <strong>EN</strong> or <strong>NE</strong> — button toggles</li>
+      <li>Resize browser to mobile — hamburger appears</li>
+      <li>Scroll down — back-to-top appears bottom-right</li>
+    </ul>
+
+    <h3>Demo text block 1</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+    <h3>Demo text block 2</h3>
+    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+    <h3>Demo text block 3</h3>
+    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+
+    <blockquote>This blockquote tests styling. Scroll further to reveal back-to-top.</blockquote>
+
+    <h3>Demo text block 4</h3>
+    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+
+    <h3>Demo text block 5</h3>
+    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+
+    <p>End of demo content.</p>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <strong>PragyaRoot</strong>
+      <p>Class 10 study resources for Nepal's SEE students.</p>
+    </div>
+    <nav class="footer-nav">
+      <a href="/p/about-us.html">About</a>
+      <a href="/p/contact-us.html">Contact</a>
+      <a href="/p/privacy-policy.html">Privacy Policy</a>
+    </nav>
+    <div class="footer-copy">© 2026 PragyaRoot.</div>
+  </div>
+</footer>
+
+<button type="button" class="back-top" id="back-top" aria-label="Back to top">↑</button>
+
+<script>
+(function () {
+  var doc = document.documentElement;
+  var themeToggle = document.getElementById('theme-toggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+      doc.classList.toggle('is-dark');
+      localStorage.setItem('theme', doc.classList.contains('is-dark') ? 'dark' : 'light');
+    });
+  }
+  var langBtns = document.querySelectorAll('.lang-btn');
+  var savedLang = localStorage.getItem('lang') || 'en';
+  langBtns.forEach(function (btn) {
+    if (btn.dataset.lang === savedLang) btn.classList.add('active');
+    else btn.classList.remove('active');
+    btn.addEventListener('click', function () {
+      langBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      localStorage.setItem('lang', btn.dataset.lang);
+    });
+  });
+  var toggle = document.getElementById('mobile-toggle');
+  var overlay = document.getElementById('overlay');
+  var closeBtn = document.getElementById('slide-menu-close');
+  function openMenu(){ document.body.classList.add('menu-open'); }
+  function closeMenu(){ document.body.classList.remove('menu-open'); }
+  if (toggle) toggle.addEventListener('click', openMenu);
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+  if (overlay) overlay.addEventListener('click', closeMenu);
+  var backTop = document.getElementById('back-top');
+  if (backTop) {
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 400) backTop.classList.add('show');
+      else backTop.classList.remove('show');
+    });
+    backTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
