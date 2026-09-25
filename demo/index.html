@@ -9,77 +9,42 @@
 <link rel="stylesheet" href="style.css">
 <script>
 (function(){
-  var t = localStorage.getItem('theme');
-  if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  if (t === 'dark') document.documentElement.classList.add('is-dark');
+  try {
+    var t = localStorage.getItem('theme');
+    if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (t === 'dark') document.documentElement.classList.add('is-dark');
+  } catch (error) {}
 })();
 </script>
 </head>
 <body>
 
-<div id="site-header"></div>
+<div id="site-header" aria-live="polite"></div>
 
 <main class="page">
-
   <section class="hero">
-    <p class="hero-eyebrow">
-      <span class="dot"></span>
-      <span data-i18n="hero.badge">Nepal · Class 10 · SEE 2082/83</span>
-    </p>
-    <h1 class="hero-title">
-      <span data-i18n="hero.title1">Knowledge</span><span class="sep">·</span><span data-i18n="hero.title2">Confidence</span><span class="sep">·</span><span data-i18n="hero.title3">Results</span>
-    </h1>
+    <p class="hero-eyebrow"><span class="dot"></span><span data-i18n="hero.badge">Nepal · Class 10 · SEE 2082/83</span></p>
+    <h1 class="hero-title"><span data-i18n="hero.title1">Knowledge</span><span class="sep">·</span><span data-i18n="hero.title2">Confidence</span><span class="sep">·</span><span data-i18n="hero.title3">Results</span></h1>
     <p class="hero-sub" data-i18n="hero.sub">Class 10 study resources built for Nepal's SEE students.</p>
   </section>
 
   <section class="cards">
-    <a href="/p/class-10-nepali.html" class="card">
-      <span class="card-tag" data-i18n="card.available">Available</span>
-      <h3 class="card-title" data-i18n="card.nepali">Nepali</h3>
-      <p class="card-desc" data-i18n="card.nepali.desc">Notes · Grammar · Solutions</p>
-    </a>
-    <a href="/p/class-10-english.html" class="card">
-      <span class="card-tag" data-i18n="card.available">Available</span>
-      <h3 class="card-title" data-i18n="card.english">English</h3>
-      <p class="card-desc" data-i18n="card.english.desc">Notes · Grammar · Solutions</p>
-    </a>
-    <div class="card is-soon">
-      <span class="card-tag soon" data-i18n="card.soon">Soon</span>
-      <h3 class="card-title" data-i18n="card.science">Science</h3>
-      <p class="card-desc" data-i18n="card.science.desc">Notes · Solutions</p>
-    </div>
-    <div class="card is-soon">
-      <span class="card-tag soon" data-i18n="card.soon">Soon</span>
-      <h3 class="card-title" data-i18n="card.math">Mathematics</h3>
-      <p class="card-desc" data-i18n="card.math.desc">Step-by-step solutions</p>
-    </div>
+    <a href="/p/class-10-nepali.html" class="card"><span class="card-tag" data-i18n="card.available">Available</span><h3 class="card-title" data-i18n="card.nepali">Nepali</h3><p class="card-desc" data-i18n="card.nepali.desc">Notes · Grammar · Solutions</p></a>
+    <a href="/p/class-10-english.html" class="card"><span class="card-tag" data-i18n="card.available">Available</span><h3 class="card-title" data-i18n="card.english">English</h3><p class="card-desc" data-i18n="card.english.desc">Notes · Grammar · Solutions</p></a>
+    <div class="card is-soon"><span class="card-tag soon" data-i18n="card.soon">Soon</span><h3 class="card-title" data-i18n="card.science">Science</h3><p class="card-desc" data-i18n="card.science.desc">Notes · Solutions</p></div>
+    <div class="card is-soon"><span class="card-tag soon" data-i18n="card.soon">Soon</span><h3 class="card-title" data-i18n="card.math">Mathematics</h3><p class="card-desc" data-i18n="card.math.desc">Step-by-step solutions</p></div>
   </section>
 
   <section class="content">
-    <h2 data-i18n="content.about.title">About PragyaRoot</h2>
-    <p data-i18n="content.about.body">PragyaRoot is a free study resource for Class 10 students preparing for the SEE examination in Nepal.</p>
-
-    <h2 data-i18n="content.why.title">Why it exists</h2>
-    <p data-i18n="content.why.body">Most Class 10 material online is either too shallow to be useful or too dense to read on a phone.</p>
-
+    <h2 data-i18n="content.about.title">About PragyaRoot</h2><p data-i18n="content.about.body">PragyaRoot is a free study resource for Class 10 students preparing for the SEE examination in Nepal.</p>
+    <h2 data-i18n="content.why.title">Why it exists</h2><p data-i18n="content.why.body">Most Class 10 material online is either too shallow to be useful or too dense to read on a phone.</p>
     <h2 data-i18n="content.what.title">What you'll find</h2>
-    <ul>
-      <li data-i18n="content.what.li1">Chapter notes for every subject</li>
-      <li data-i18n="content.what.li2">Step-by-step exercise solutions</li>
-      <li data-i18n="content.what.li3">Nepali and English grammar guides</li>
-      <li data-i18n="content.what.li4">Interactive learning games</li>
-    </ul>
-
-    <p class="content-cta">
-      <a href="/p/about-us.html" class="btn" data-i18n="content.cta">Learn more</a>
-    </p>
+    <ul><li data-i18n="content.what.li1">Chapter notes for every subject</li><li data-i18n="content.what.li2">Step-by-step exercise solutions</li><li data-i18n="content.what.li3">Nepali and English grammar guides</li><li data-i18n="content.what.li4">Interactive learning games</li></ul>
+    <p class="content-cta"><a href="/p/about-us.html" class="btn" data-i18n="content.cta">Learn more</a></p>
   </section>
-
 </main>
 
-<div id="site-footer"></div>
-
+<div id="site-footer" aria-live="polite"></div>
 <script src="script.js"></script>
-
 </body>
 </html>
